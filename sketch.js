@@ -13,11 +13,12 @@ function setup() {
   
 	createCanvas(500, 500);
   
-    dog = createSprite(250,250);
-    dog.addImage(dogImage)
-    dog.scale = 0.1;
+  dog = createSprite(250,250);
+  dog.addImage(dogImage)
+  dog.scale = 0.1;
   
   foodStock = database.ref('/food');
+  foodStock.on("value", writeStock, readStock);
   
 }
 
@@ -37,9 +38,9 @@ function draw() {
 
 }
 
-function readStock(){
+function readStock(data){
 
-  foodS = database.val();
+  foodS = data.val();
   
 }
 
@@ -52,10 +53,12 @@ function writeStock(x){
   }
 
   database.ref('/').update({
-    Food:x
+    'Food': x
   })
-  
+
+  database.on()
+
 }
 
-
+//Please let me know the errors mam. I'll correct them and submit it to you.
 
